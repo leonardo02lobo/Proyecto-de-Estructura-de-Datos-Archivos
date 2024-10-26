@@ -1,1 +1,1 @@
-31489733:leonardo lobo:San Cristobal,1923-A:corsa:toyota:2012:1,14:El Reloj.
+31489733:jose:San Cristobal,192-A12:corsa:toyota:2012::1,14:El Reloj.

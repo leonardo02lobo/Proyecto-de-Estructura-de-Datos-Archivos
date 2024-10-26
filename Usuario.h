@@ -55,32 +55,36 @@ class Usuario{
 			archivo<<getCedula()<<":"<<getNombre()<<":"<<getDireccion()<<",";
 		}
 		
-		void ModificarUsuario(fstream& archivo){
-			string linea;
-			getline(archivo,linea);
-			int opcion;
-			
-			cout<<"Que quieres modificar?: "<<endl;
-			cout<<"1. Nombre\n2. Cedula\n3. Direccion\nElegir la opcion: ";
-			cin>>opcion;
-			
-			switch(opcion){
-				case 1:
-					//prueba para separar datos
-					string cadena = "Luis;Cabrera;luis@ejemplo.com;parzibyte.me";
-				    stringstream input_stringstream(cadena);
-				    string token;
-				
-				    while (getline(input_stringstream, token, ';')) {
-				        cout << "Token: " << token <<endl;
-				    }
+		void ModificarUsuario(fstream& archivo) {
+		    int opcion = 0;
 
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-			}
+		    cout << "Que quieres modificar?: " << endl;
+		    cout << "1. Nombre\n2. Cedula\n3. Direccion\nElegir la opcion: ";
+		    cin >> opcion;
+		
+		    switch (opcion) {
+		        case 1: {
+		            string antiguoNombre, nuevoNombre;
+		
+		            fflush(stdin);
+		            cout << "Digite el antiguo nombre: ";
+		            getline(cin, antiguoNombre);
+		
+		            fflush(stdin);
+		            cout << "Digite el nuevo nombre: ";
+		            getline(cin, nuevoNombre);
+		            fflush(stdin);
+					
+					modificarElemento(antiguoNombre,nuevoNombre,archivo);
+		            break;
+		        }
+		        case 2: {
+		            break;
+		        }
+		        case 3: {
+		            break;
+		        }
+		    }
 		}
 		
 		void ConsultarUsuario(fstream& archivo){
@@ -93,5 +97,27 @@ class Usuario{
 		void mostrar(){
 			cout<<_nombre<<"  "<<_cedula<<endl;
 		}
+		
+		private:
+			void modificarElemento(string antiguo, string nuevo,fstream& archivo){
+				string linea;
+			    fstream temp;
+			    temp.open("Temporal.txt",ios::in | ios::out | ios::app);
+		    
+		    	while (getline(archivo, linea)) {
+		            size_t pos = linea.find(antiguo);
+		            while (pos != string::npos) {
+		            	linea.replace(pos, antiguo.length(), nuevo);
+		            	pos = linea.find(antiguo, pos + nuevo.length());
+		            }
+		            linea += "\n";
+		            temp<<linea;
+		        }
+			    archivo.close();
+			    temp.close();
+			    
+			    remove("Datos.txt");
+			    rename("Temporal.txt","Datos.txt");
+			}
 };
 #endif

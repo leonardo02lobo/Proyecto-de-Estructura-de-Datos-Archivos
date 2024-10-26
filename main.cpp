@@ -110,6 +110,7 @@ void MenuGestion(){
 			case 1:	
 					usuario.AgregarUsuario(archivo);
 					vehiculo.AgregarVehiculo(archivo);
+					archivo<<"\n";
 					archivo.close();
 				break;
 				
