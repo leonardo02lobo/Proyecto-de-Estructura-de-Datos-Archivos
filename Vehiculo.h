@@ -95,7 +95,77 @@ class Vehiculo{
 		}
 		
 		void ModificarVehiculo(fstream& archivo){
-			
+			int opcion = 0;
+		    string antiguo,nuevo;
+
+		    cout << "Que quieres modificar?: " << endl;
+		    cout << "1. Placa\n2. Modelo\n3. Marca\n4. Anio\n5. Disponible\n6.Sector\nElegir la opcion: ";
+		    cin >> opcion;
+		
+		    switch (opcion) {
+		        case 1: {
+		            fflush(stdin);
+		            cout << "Digite la antigua placa: ";
+		            getline(cin, antiguo);
+		            
+		            fflush(stdin);
+		            cout << "Digite ela nueva placa: ";
+		            getline(cin, nuevo);		
+		            break;
+		        }
+		        case 2: {
+		            fflush(stdin);
+		            cout << "Digite el antiguo modelo: ";
+		            getline(cin, antiguo);
+		            
+		            fflush(stdin);
+		            cout << "Digite el nuevo modelo: ";
+		            getline(cin, nuevo);
+		            break;
+		        }
+		        case 3: {
+		            fflush(stdin);
+		            cout << "Digite la antigua marca: ";
+		            getline(cin, antiguo);
+		            
+		            fflush(stdin);
+		            cout << "Digite la nueva marca: ";
+		            getline(cin, nuevo);
+		            break;
+		        }
+		        case 4: {
+		            fflush(stdin);
+		            cout << "Digite el antiguo anio: ";
+		            getline(cin, antiguo);
+		            
+		            fflush(stdin);
+		            cout << "Digite el nuevo anio: ";
+		            getline(cin, nuevo);
+		            break;
+		        }
+		        case 5: {
+		            fflush(stdin);
+		            cout << "Digite la antigua disponibilidad (1 para si y 2 para no): ";
+		            getline(cin, antiguo);
+		            
+		            fflush(stdin);
+		            cout << "Digite la nueva disponibilidad (1 para si y 2 para no): ";
+		            getline(cin, nuevo);
+		            break;
+		        }
+		        case 6: {
+		            fflush(stdin);
+		            cout << "Digite el antiguo sector: ";
+		            getline(cin, antiguo);
+		            
+		            fflush(stdin);
+		            cout << "Digite el nuevo sector: ";
+		            getline(cin, nuevo);
+		            break;
+		        }
+		    }
+		    fflush(stdin);
+		    modificarElemento(antiguo,nuevo,archivo);
 		}
 		
 		void ConsultarVehiculo(fstream& archivo){
@@ -107,6 +177,28 @@ class Vehiculo{
 		void ActualizarUbicacionVehiculo(){
 			
 		}
+		
+		private:
+			void modificarElemento(string antiguo, string nuevo,fstream& archivo){
+				string linea;
+			    fstream temp;
+			    temp.open("Temporal.txt",ios::in | ios::out | ios::app);
+		    
+		    	while (getline(archivo, linea)) {
+		            size_t pos = linea.find(antiguo);
+		            while (pos != string::npos) {
+		            	linea.replace(pos, antiguo.length(), nuevo);
+		            	pos = linea.find(antiguo, pos + nuevo.length());
+		            }
+		            linea += "\n";
+		            temp<<linea;
+		        }
+			    archivo.close();
+			    temp.close();
+			    
+			    remove("Datos.txt");
+			    rename("Temporal.txt","Datos.txt");
+			}
 };
 
 #endif

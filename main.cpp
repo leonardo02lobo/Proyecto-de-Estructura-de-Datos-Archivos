@@ -189,16 +189,14 @@ void MenuModificarDatos(Usuario u, Vehiculo v, Sector s){
 			gotoxy(40,6);
 			cout<<"2. Modificar Datos del Vehiculo"<<endl;
 			gotoxy(40,8);
-			cout<<"3. Modificar Datos del Sector"<<endl;
-			gotoxy(40,10);
 			cout<<"4. Salir"<<endl;
-			gotoxy(40,12);
+			gotoxy(40,10);
 			cout<<"Ingrese la opcion: "<<endl;
-			gotoxy(40,14);
+			gotoxy(40,12);
 			cin>>opcion;
 
 			if(opcion < 1 || opcion > 4){
-				gotoxy(40,16);
+				gotoxy(40,14);
 				cout<<"La opcion ingresa es invalida"<<endl;
 				system("pause");	
 			}	

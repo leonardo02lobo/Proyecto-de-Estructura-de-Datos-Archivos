@@ -26,16 +26,5 @@ class Sector{
 		string getNombreSector(){
 			return this->_nombreSector;
 		}
-		
-		void ModificarSector(fstream& archivo){
-			
-		}
-		
-		void ConsultarSector(fstream& archivo){
-			
-		}
-		void EliminarSector(fstream& archivo){
-			
-		}
 };
 #endif

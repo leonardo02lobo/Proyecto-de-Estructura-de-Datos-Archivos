@@ -57,6 +57,7 @@ class Usuario{
 		
 		void ModificarUsuario(fstream& archivo) {
 		    int opcion = 0;
+		    string antiguo,nuevo;
 
 		    cout << "Que quieres modificar?: " << endl;
 		    cout << "1. Nombre\n2. Cedula\n3. Direccion\nElegir la opcion: ";
@@ -64,27 +65,38 @@ class Usuario{
 		
 		    switch (opcion) {
 		        case 1: {
-		            string antiguoNombre, nuevoNombre;
-		
 		            fflush(stdin);
 		            cout << "Digite el antiguo nombre: ";
-		            getline(cin, antiguoNombre);
-		
+		            getline(cin, antiguo);
+		            
 		            fflush(stdin);
 		            cout << "Digite el nuevo nombre: ";
-		            getline(cin, nuevoNombre);
-		            fflush(stdin);
-					
-					modificarElemento(antiguoNombre,nuevoNombre,archivo);
+		            getline(cin, nuevo);		
 		            break;
 		        }
 		        case 2: {
+		            fflush(stdin);
+		            cout << "Digite la antigua Cedula: ";
+		            getline(cin, antiguo);
+		            
+		            fflush(stdin);
+		            cout << "Digite la nueva Cedula: ";
+		            getline(cin, nuevo);
 		            break;
 		        }
 		        case 3: {
+		            fflush(stdin);
+		            cout << "Digite la antigua direccion: ";
+		            getline(cin, antiguo);
+		            
+		            fflush(stdin);
+		            cout << "Digite la nueva direccion: ";
+		            getline(cin, nuevo);
 		            break;
 		        }
 		    }
+		    fflush(stdin);
+		    modificarElemento(antiguo,nuevo,archivo);
 		}
 		
 		void ConsultarUsuario(fstream& archivo){
@@ -93,11 +105,7 @@ class Usuario{
 		void EliminarUsuario(fstream& archivo){
 			
 		}
-		
-		void mostrar(){
-			cout<<_nombre<<"  "<<_cedula<<endl;
-		}
-		
+
 		private:
 			void modificarElemento(string antiguo, string nuevo,fstream& archivo){
 				string linea;
