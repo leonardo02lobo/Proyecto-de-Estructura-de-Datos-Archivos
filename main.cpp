@@ -189,19 +189,19 @@ void MenuModificarDatos(Usuario u, Vehiculo v, Sector s){
 			gotoxy(40,6);
 			cout<<"2. Modificar Datos del Vehiculo"<<endl;
 			gotoxy(40,8);
-			cout<<"4. Salir"<<endl;
+			cout<<"3. Salir"<<endl;
 			gotoxy(40,10);
 			cout<<"Ingrese la opcion: "<<endl;
 			gotoxy(40,12);
 			cin>>opcion;
 
-			if(opcion < 1 || opcion > 4){
+			if(opcion < 1 || opcion > 3){
 				gotoxy(40,14);
 				cout<<"La opcion ingresa es invalida"<<endl;
 				system("pause");	
 			}	
 			system("cls");
-		}while(opcion < 1 || opcion > 4);
+		}while(opcion < 1 || opcion > 3);
 		switch(opcion){
 			case 1:
 				u.ModificarUsuario(archivo);
@@ -210,13 +210,10 @@ void MenuModificarDatos(Usuario u, Vehiculo v, Sector s){
 				v.ModificarVehiculo(archivo);
 				break;
 			case 3:
-				s.ModificarSector(archivo);
-				break;
-			case 4:
 				cout<<"Volver al menu anterior..."<<endl;
 				break; 
 		}
 		system("pause");
 		system("cls");
-	}while(opcion != 4);
+	}while(opcion != 3);
 }
