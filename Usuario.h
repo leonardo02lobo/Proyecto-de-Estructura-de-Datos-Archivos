@@ -52,7 +52,7 @@ class Usuario{
 			cout<<"Ingrese su direccion: ";
 			getline(cin,_direccion);
 			
-			archivo<<getCedula()<<":"<<getNombre()<<":"<<getDireccion()<<",";
+			archivo<<getCedula()<<":"<<getNombre()<<":"<<getDireccion()<<":";
 		}
 		
 		void ModificarUsuario(fstream& archivo) {
@@ -99,8 +99,11 @@ class Usuario{
 		    modificarElemento(antiguo,nuevo,archivo);
 		}
 		
-		void ConsultarUsuario(fstream& archivo){
-			
+		void ConsultarUsuario(){
+			cout<<"Datos del Usuario"<<endl;
+			cout<<"Nombre: "<<getNombre()<<endl;
+			cout<<"Cedula: "<<getCedula()<<endl;
+			cout<<"Direccion: "<<getDireccion()<<endl;
 		}
 		void EliminarUsuario(fstream& archivo){
 			

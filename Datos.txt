@@ -1,1 +1,3 @@
-21334565:jose:las mesas,1234-A:corsa:toyota:2012::1,14:El Reloj.
+31489733:leonardo:las mesas:3128-A:corsa:toyota:2012:1:14:El Reloj
+12345678:jose:las mesas:3128-A:corsa:toyota:2012:1:14:El Reloj
+12332123:javier:las mesas:3128-A:corsa:toyota:2012:1:14:El Reloj

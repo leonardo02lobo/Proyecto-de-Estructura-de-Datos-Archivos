@@ -91,7 +91,7 @@ class Vehiculo{
 			
 			(aux == 1)? _disponible = true: _disponible = false;
 			
-			archivo<<getPlaca()<<":"<<getModelo()<<":"<<getMarca()<<":"<<getAnio()<<":"<<":"<<getDisponible()<<","<<getSectorActual().getId()<<":"<<getSectorActual().getNombreSector()<<".";
+			archivo<<getPlaca()<<":"<<getModelo()<<":"<<getMarca()<<":"<<getAnio()<<":"<<getDisponible()<<":"<<getSectorActual().getId()<<":"<<getSectorActual().getNombreSector();
 		}
 		
 		void ModificarVehiculo(fstream& archivo){
@@ -168,12 +168,21 @@ class Vehiculo{
 		    modificarElemento(antiguo,nuevo,archivo);
 		}
 		
-		void ConsultarVehiculo(fstream& archivo){
-			
+		void ConsultarVehiculo(){
+			cout<<"Datos Vehiculo"<<endl;
+			cout<<"PLaca: "<<getPlaca()<<endl;
+			cout<<"Modelo: "<<getModelo()<<endl;
+			cout<<"Marca: "<<getMarca()<<endl;
+			cout<<"Anio: "<<getAnio()<<endl;
+			cout<<"Id Del Sector Actual: "<<getSectorActual().getId()<<endl;
+			cout<<"Nombre Del Sector Actual: "<<getSectorActual().getNombreSector()<<endl;
+			cout<<"Disponible: "<<((getDisponible())? "Esta Disponible" : "No esta disponible")<<endl;
 		}
+		
 		void EliminarVehiculo(fstream& archivo){
 			
 		}
+		
 		void ActualizarUbicacionVehiculo(){
 			
 		}

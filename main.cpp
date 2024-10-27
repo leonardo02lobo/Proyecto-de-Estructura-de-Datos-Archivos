@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <fstream> 
 #include <vector>
+#include <string>
 #include "Usuario.h"
 #include "Vehiculo.h"
 #include "Chofer.h"
@@ -24,7 +25,7 @@ using namespace std;
 void Menu();
 void MenuGestion();
 void MenuServicios(); 
-void MenuModificarDatos(Usuario u, Vehiculo v, Sector s);
+void MenuModificarDatos(Usuario u, Vehiculo v);
 fstream archivo("Datos.txt",ios::in | ios::out | ios::app);
 
 int main(int argc, char** argv) {
@@ -78,7 +79,6 @@ void MenuGestion(){
 	int opcion = 0;
 	Usuario usuario;
 	Vehiculo vehiculo;
-	Sector sector;
 	do{
 		do{
 			fflush(stdin);
@@ -115,14 +115,91 @@ void MenuGestion(){
 				break;
 				
 			case 2:
-				MenuModificarDatos(usuario,vehiculo,sector);
+				MenuModificarDatos(usuario,vehiculo);
 				break;
 			
-			case 3:
+			case 3: {
+				string cedula;
+				bool band = false;
+				char* datos;
+				fflush(stdin);
+				cout<<"Ingrese la cedula a consultar los datos: ";
+				getline(cin,cedula);
 				
+				string cedulaRegistrada;
+				archivo.seekp(0);
+				while(getline(archivo,cedulaRegistrada)){
+					char* cedulaRegistradaCStr = const_cast<char*>(cedulaRegistrada.c_str());
+					datos = strtok(cedulaRegistradaCStr,":");
+					if(cedula == datos){
+						band = true;
+						break;
+					}
+				}
+				
+				if(band){
+					cout<<"\nDatos encontrados\n"<<endl;
+					usuario.setCedula(atoi(datos));
+					datos = strtok(NULL,":");
+					usuario.setNombre(datos);
+					datos = strtok(NULL,":");
+					usuario.setDireccion(datos);
+					usuario.ConsultarUsuario();
+					cout<<endl;
+					datos = strtok(NULL,":");
+					vehiculo.setPlaca(datos);
+					datos = strtok(NULL,":");
+					vehiculo.setModelo(datos);
+					datos = strtok(NULL,":");
+					vehiculo.setMarca(datos);
+					datos = strtok(NULL,":");
+					vehiculo.setAnio(atoi(datos));
+					datos = strtok(NULL,":");
+					bool disponible = (atoi(datos) == 1) ? true : false;
+					vehiculo.setDisponible(disponible);
+					datos = strtok(NULL,":");
+					string idSector = datos;
+					datos = strtok(NULL,":");
+					string nombreSector = datos;
+					vehiculo.setSectorActual(Sector(atoi(idSector.c_str()),nombreSector));
+					vehiculo.ConsultarVehiculo();
+				}else{
+					cout<<"La cedula no coincide con ninguna de las registradas"<<endl;
+				}
 				break;
-			case 4:
+			}				
+			case 4:{
+					string cedula;
+					string linea;
+				    fstream temp;
+				    bool encontrado = false;
+				    temp.open("Temporal.txt",ios::in | ios::out | ios::app);
+	
+					fflush(stdin);
+					cout<<"Ingrese la cedula para eliminar los datos: ";
+					getline(cin,cedula);
+			    
+			    	while (getline(archivo, linea)) {
+			    		char* cedulaRegistradaCStr = const_cast<char*>(linea.c_str());
+						char* datos = strtok(cedulaRegistradaCStr,":");
+						if(datos != cedula){
+							temp<<linea<<endl;
+						}else{
+							encontrado = true;
+						}
+			        }
+				    archivo.close();
+				    temp.close();
+				    
+				    remove("Datos.txt");
+				    rename("Temporal.txt","Datos.txt");
+				    if (encontrado) {
+				        cout << "Registro eliminado." << endl;
+				    } else {
+				        cout << "Registro no encontrado." << endl;
+				    }
 				break;
+			}
 			case 5:
 				break;
 		}
@@ -177,7 +254,7 @@ void MenuServicios(){
 	}while(opcion != 5);
 }
 
-void MenuModificarDatos(Usuario u, Vehiculo v, Sector s){
+void MenuModificarDatos(Usuario u, Vehiculo v){
 	int opcion = 0;
 	do{
 		do{
